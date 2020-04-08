@@ -33,7 +33,7 @@ object Pyrolysis : KilnMod() {
                     .define(submod::class.simpleName, default)
             println("SPEC: $spec")
             //configMap[submod] = spec
-            println("IN: ${configMap[submod]}")
+            println("IN: ${submod}")
         }
 
         fun changeActiveStatus() {
