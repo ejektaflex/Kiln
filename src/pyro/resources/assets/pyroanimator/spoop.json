@@ -1,0 +1,125 @@
+{
+	"scale": 1,
+	"texture_width": 16,
+	"texture_height": 16,
+	"cubes": [
+		{
+			"name": "root",
+			"scale": 1,
+			"mirror": false,
+			"tex_off": [0, 0],
+			"off": [0, 0, 0],
+			"rot_point": [0, 24, 0],
+			"size": [0, 0, 0],
+			"rot": [0, 0, 0],
+			"children": [
+				{
+					"name": "bb_main",
+					"scale": 1,
+					"mirror": false,
+					"tex_off": [4, 0],
+					"off": [-2, -6, 0],
+					"rot_point": [0, 0, 0],
+					"size": [3, 4, 1],
+					"rot": [0, 0, 0]
+				},
+				{
+					"name": "left_loog",
+					"scale": 1,
+					"mirror": false,
+					"tex_off": [0, 0],
+					"off": [0, 0, 0],
+					"rot_point": [0.5, -2.5, 0.5],
+					"size": [0, 0, 0],
+					"rot": [0, 0, 0],
+					"children": [
+						{
+							"name": "toes",
+							"scale": 1,
+							"mirror": false,
+							"tex_off": [0, 0],
+							"off": [0, 0, 0],
+							"rot_point": [-0.5, 2.5, -0.5],
+							"size": [0, 0, 0],
+							"rot": [0, 0, 0],
+							"children": [
+								{
+									"name": "toe1",
+									"scale": 1,
+									"mirror": false,
+									"tex_off": [0, 0],
+									"off": [-0.5, 20.5, 0.5],
+									"rot_point": [0, 0, 0],
+									"size": [1, 1, 1],
+									"rot": [0, 0, 0]
+								},
+								{
+									"name": "toe2",
+									"scale": 1,
+									"mirror": false,
+									"tex_off": [0, 0],
+									"off": [-0.5, 20.5, 0.5],
+									"rot_point": [0, 0, 0],
+									"size": [1, 1, 1],
+									"rot": [0, 0, 0]
+								}
+							]
+						},
+						{
+							"name": "left_leg",
+							"scale": 1,
+							"mirror": false,
+							"tex_off": [0, 0],
+							"off": [-0.5, 24.5, -0.5],
+							"rot_point": [0, 0, 0],
+							"size": [1, 2, 1],
+							"rot": [0, 0, 0]
+						},
+						{
+							"name": "left_foot",
+							"scale": 1,
+							"mirror": false,
+							"tex_off": [0, 0],
+							"off": [-0.5, 25.5, -1.5],
+							"rot_point": [0, 0, 0],
+							"size": [1, 1, 1],
+							"rot": [0, 0, 0]
+						}
+					]
+				},
+				{
+					"name": "right_loog",
+					"scale": 1,
+					"mirror": false,
+					"tex_off": [0, 0],
+					"off": [0, 0, 0],
+					"rot_point": [-1.5, -2.5, 0.5],
+					"size": [0, 0, 0],
+					"rot": [0, 0, 0],
+					"children": [
+						{
+							"name": "right_leg",
+							"scale": 1,
+							"mirror": false,
+							"tex_off": [0, 0],
+							"off": [-0.5, 24.5, -0.5],
+							"rot_point": [0, 0, 0],
+							"size": [1, 2, 1],
+							"rot": [0, 0, 0]
+						},
+						{
+							"name": "right_foot",
+							"scale": 1,
+							"mirror": false,
+							"tex_off": [0, 0],
+							"off": [-0.5, 25.5, -1.5],
+							"rot_point": [0, 0, 0],
+							"size": [1, 1, 1],
+							"rot": [0, 0, 0]
+						}
+					]
+				}
+			]
+		}
+	]
+}

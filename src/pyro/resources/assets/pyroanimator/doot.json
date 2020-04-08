@@ -1,0 +1,113 @@
+{
+	"scale": 1,
+	"texture_width": 16,
+	"texture_height": 16,
+	"cubes": [
+		{
+			"name": "bb_main",
+			"scale": 0,
+			"mirror": false,
+			"tex_off": [4, 0],
+			"off": [-2, 18, 0],
+			"rot_point": [0, 0, 0],
+			"size": [3, 4, 1],
+			"rot": [0, 0, 0]
+		},
+		{
+			"name": "right_loog",
+			"scale": 0,
+			"mirror": false,
+			"tex_off": [0, 0],
+			"off": [0, 0, 0],
+			"rot_point": [-0.5, 21.5, 0.5],
+			"size": [0, 0, 0],
+			"rot": [0, 0, 0],
+			"children": [
+				{
+					"name": "right_leg",
+					"scale": 0,
+					"mirror": false,
+					"tex_off": [0, 0],
+					"off": [-1.5, 0.5, -0.5],
+					"rot_point": [0, 0, 0],
+					"size": [1, 2, 1],
+					"rot": [0, 0, 0]
+				},
+				{
+					"name": "right_foot",
+					"scale": 0,
+					"mirror": false,
+					"tex_off": [0, 0],
+					"off": [-1.5, 1.5, -1.5],
+					"rot_point": [0, 0, 0],
+					"size": [1, 1, 1],
+					"rot": [0, 0, 0]
+				}
+			]
+		},
+		{
+			"name": "left_loog",
+			"scale": 0,
+			"mirror": false,
+			"tex_off": [0, 0],
+			"off": [0, 0, 0],
+			"rot_point": [-0.5, 21.5, 0.5],
+			"size": [0, 0, 0],
+			"rot": [0, 0, 0],
+			"children": [
+				{
+					"name": "toes",
+					"scale": 0,
+					"mirror": false,
+					"tex_off": [0, 0],
+					"off": [0, 0, 0],
+					"rot_point": [0.5, 2.5, -0.5],
+					"size": [0, 0, 0],
+					"rot": [0, 0, 0],
+					"children": [
+						{
+							"name": "toe1",
+							"scale": 0,
+							"mirror": false,
+							"tex_off": [0, 0],
+							"off": [-1.5, 20.5, 0.5],
+							"rot_point": [0, 0, 0],
+							"size": [1, 1, 1],
+							"rot": [0, 0, 0]
+						},
+						{
+							"name": "toe2",
+							"scale": 0,
+							"mirror": false,
+							"tex_off": [0, 0],
+							"off": [-1.5, 20.5, 0.5],
+							"rot_point": [0, 0, 0],
+							"size": [1, 1, 1],
+							"rot": [0, 0, 0]
+						}
+					]
+				},
+				{
+					"name": "left_leg",
+					"scale": 0,
+					"mirror": false,
+					"tex_off": [0, 0],
+					"off": [0.5, 0.5, -0.5],
+					"rot_point": [0, 0, 0],
+					"size": [1, 2, 1],
+					"rot": [0, 0, 0]
+				},
+				{
+					"name": "left_foot",
+					"scale": 0,
+					"mirror": false,
+					"tex_off": [0, 0],
+					"off": [0.5, 1.5, -1.5],
+					"rot_point": [0, 0, 0],
+					"size": [1, 1, 1],
+					"rot": [0, 0, 0]
+				}
+			]
+		}
+	]
+}
