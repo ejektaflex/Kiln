@@ -1,6 +1,7 @@
 package ejektaflex.pyrolysis.animator.client.renderer.entity
 
 import ejektaflex.pyrolysis.Pyrolysis
+import ejektaflex.pyrolysis.animator.PyroAnimator
 import ejektaflex.pyrolysis.animator.client.model.SpoopyModel
 import ejektaflex.pyrolysis.animator.entity.SpoopyEntity
 import net.minecraft.client.renderer.entity.EntityRendererManager
@@ -17,6 +18,6 @@ class SpoopyRenderer(renderManagerIn: EntityRendererManager) : MobRenderer<Spoop
     }
 
     companion object {
-        private val TEXTURES = Pyrolysis.locate("texture.png")
+        private val TEXTURES = PyroAnimator.locate("texture.png")
     }
 }
