@@ -22,11 +22,11 @@ class SpoopyModel : KilnSegmentedModel<SpoopyEntity>(PyroAnimator.locate("spoop.
     }
 
     override fun setRotationAngles(entityIn: SpoopyEntity, limbSwing: Float, limbSwingAmount: Float, ageInTicks: Float, netHeadYaw: Float, headPitch: Float) {
-        renderMap["nose_bone"]!!.apply {
+        renderMap["leg"]!!.apply {
             rotateAngleZ = Math.toRadians(ageInTicks * 2.0 % 360.0).toFloat()
         }
 
-        renderMap["drip_bone"]!!.apply {
+        renderMap["leg2"]!!.apply {
             rotateAngleZ = Math.toRadians(ageInTicks * 2.0 % 360.0).toFloat()
         }
 

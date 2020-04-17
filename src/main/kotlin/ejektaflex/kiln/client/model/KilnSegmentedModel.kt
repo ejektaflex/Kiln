@@ -105,7 +105,6 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : En
         var subModels = mutableListOf<BoneModel>()
     }
 
-
     class BoneBox {
         var name = "NO_BOX_NAME"
         var uv = mutableListOf<Int>()

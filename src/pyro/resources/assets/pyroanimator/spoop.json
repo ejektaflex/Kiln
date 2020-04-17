@@ -4,57 +4,28 @@
 	"texture_height": 16,
 	"models": [
 		{
-			"name": "head_group",
-			"pivot": [0, 0, 0],
+			"name": "leg",
+			"pivot": [-0.5, -8, -0.5],
 			"angle": [0, 0, 0],
 			"boxes": [
 				{
-					"name": "head",
+					"name": "leg_part1",
 					"uv": [0, 0],
-					"pos": [-4, -32, -4],
-					"size": [8, 10, 8]
+					"pos": [-1, -16, -1],
+					"size": [1, 8, 1]
 				}
 			],
 			"submodels": [
 				{
-					"name": "nose_bone",
-					"pivot": [0, -25, -5],
+					"name": "leg2",
+					"pivot": [0, -8, 0],
 					"angle": [0, 0, 0],
 					"boxes": [
 						{
-							"name": "nose",
+							"name": "cube",
 							"uv": [0, 0],
-							"pos": [-1, -25, -6],
-							"size": [2, 4, 2]
-						}
-					],
-					"submodels": [
-						{
-							"name": "drip_bone",
-							"pivot": [0, 4, 0],
-							"angle": [0, 0, 0],
-							"boxes": [
-								{
-									"name": "cube",
-									"uv": [0, 0],
-									"pos": [-0.5, 5, -2],
-									"size": [1, 1, 1]
-								}
-							],
-							"submodels": []
-						}
-					]
-				},
-				{
-					"name": "face",
-					"pivot": [-2, -32, -4.5],
-					"angle": [-45, -30, 15],
-					"boxes": [
-						{
-							"name": "right_eye",
-							"uv": [0, 0],
-							"pos": [-3, -30, -5],
-							"size": [2, 2, 1]
+							"pos": [-0.5, -11, -0.5],
+							"size": [1, 3, 1]
 						}
 					],
 					"submodels": []
@@ -67,10 +38,10 @@
 			"angle": [0, 0, 0],
 			"boxes": [
 				{
-					"name": "foot",
+					"name": "body",
 					"uv": [0, 0],
-					"pos": [-1, -33, 0],
-					"size": [1, 1, 1]
+					"pos": [-8, -8, 0],
+					"size": [16, 8, 8]
 				}
 			],
 			"submodels": []

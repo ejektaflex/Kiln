@@ -19,7 +19,7 @@ var kilnCodec = new Codec('kiln_exportable', {
 		Outliner.root.forEach(obj => {
 			console.log("It's a " + obj.type);
 			if (obj.type === 'cube') {
-				baseModel.boxes.push(makeBox(obj));
+				baseModel.boxes.push(makeBox(obj, baseModel));
 			} else {
 				entity.models.push(makeModel(obj, null))
 				//let cube = recurvBBGroup(obj, createCubeFromGroup(obj, true));
@@ -57,18 +57,6 @@ function makeEmptyModel() {
 function makeModel(obj, parent) {
 	var model = makeEmptyModel();
 
-	// init
-	/*
-	if (parent === null) {
-		model.pivot = [-obj.origin[0], -obj.origin[1], obj.origin[2]]
-	} else {
-		model.pivot = [
-			-parent.pivot[0]-obj.origin[0], 
-			-parent.pivot[1]-obj.origin[1], 
-			-parent.pivot[2]+obj.origin[2]
-		];
-	}
-	*/
 	model.pivot = [-obj.origin[0], -obj.origin[1], obj.origin[2]]
 
 	
@@ -97,7 +85,7 @@ function makeModel(obj, parent) {
 	return model;
 }
 
-function makeBox(obj, parent = null) {
+function makeBox(obj, parent) {
 	var cube = makeEmptyBox();
 	cube.name = obj.name;
 	cube.uv[0] = Math.floor(obj.uv_offset[0]);
@@ -135,7 +123,7 @@ Plugin.register('kiln_exporter', {
 			icon: 'archive',
 			description: 'Allows your models to be exported in a format that Kiln can read!',
 			category: 'file',
-			condition: () => Format.id === 'modded_entity',
+			condition: () => Format.id === 'bedrock',
 			click: function () {
 				kilnCodec.export();
 			}
