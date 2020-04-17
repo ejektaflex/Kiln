@@ -1,0 +1,129 @@
+{
+
+    "tools": {
+
+    },
+
+    "enchants": {
+        "bane of arthropods": {
+            "lmax": 5,
+            "start": 0,
+            "step": 5
+        },
+        "blast protection": {
+            "lmax": 4,
+            "step": 1,
+            "defense": true
+        },
+        "chopping": {
+            "lmax": 3,
+            "step": 1
+        },
+        "depth strider": {
+            "lmax": 3,
+            "step": 2
+        },
+        "efficiency": {
+            "lmax": 5,
+            "step": 0.25
+        },
+        "fire aspect": {
+            "lmax": 2,
+            "start": -1,
+            "step": 4
+        },
+        "fire protection": {
+            "lmax": 4,
+            "step": 1
+        },
+        "flame": {
+            "lmax": 1,
+            "step": 4
+        },
+        "impaling": {
+            "lmax": 5,
+            "step": 2.5
+        },
+        "infinity": {
+            "lmax": 1,
+            "step": 10
+        },
+        "knockback": {
+            "lmax": 2,
+            "step": 2.5
+        },
+        "looting": {
+            "lmax": 3,
+            "step": 4
+        },
+        "loyalty": {
+            "lmax": 3,
+            "step": 4
+        },
+        "mending": {
+            "lmax": 1,
+            "step": 10
+        },
+        "multishot": {
+            "lmax": 1,
+            "step": 10
+        },
+        "piercing": {
+            "lmax": 4,
+            "step": 8
+        },
+        "power": {
+            "lmax": 5,
+            "start": 3,
+            "step": 2
+        },
+        "projectile protection": {
+            "lmax": 4,
+            "step": 1.6,
+            "defense": true
+        },
+        "protection": {
+            "lmax": 4,
+            "step": 0.8
+        },
+        "punch": {
+            "lmax": 2,
+            "step": 3
+        },
+        "quick charge": {
+            "lmax": 3,
+            "step": 1
+        },
+        "respiration": {
+            "lmax": 3,
+            "step": 4
+        },
+        "sharpness": {
+            "lmax": 5,
+            "start": 0.5,
+            "step": 0.5
+        },
+        "smite": {
+            "lmax": 5,
+            "step": 2.5
+        },
+        "sweeping edge": {
+            "lmax": 3,
+            "step": 3
+        },
+        "thorns": {
+            "lmax": 3,
+            "step": 1.5
+        },
+        "unbreaking": {
+            "lmax": 3,
+            "step": 5
+        }
+    },
+
+    "curses": {
+        "binding": -5,
+        "vanishing": -6
+    }
+
+}

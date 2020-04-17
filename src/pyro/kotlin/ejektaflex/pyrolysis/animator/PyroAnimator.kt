@@ -34,8 +34,6 @@ object PyroAnimator : KilnSubmod("pyroanimator") {
 
         val model = SpoopyModel()
 
-        println(model.data.type)
-
         println(model.renderMap.keys)
 
         RenderingRegistry.registerEntityRenderingHandler(type, ::SpoopyRenderer)

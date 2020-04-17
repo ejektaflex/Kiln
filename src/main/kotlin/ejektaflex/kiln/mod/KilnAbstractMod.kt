@@ -1,5 +1,6 @@
 package ejektaflex.kiln.mod
 
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import net.minecraft.client.Minecraft
 import net.minecraft.util.ResourceLocation
@@ -38,5 +39,18 @@ abstract class KilnAbstractMod {
     fun <T : Any> loadAsset(path: String, klazz: KClass<T>): T {
         return basicGson.fromJson(loadAsset(path), klazz.java)
     }
+
+    @PublishedApi
+    internal val `access$basicGson`: Gson?
+        get() = basicGson
+
+    inline fun <reified T : Any> loadAsset(path: String): T {
+        return `access$basicGson`!!.fromJson(loadAsset(path), T::class.java)
+    }
+
+    inline fun <reified T : Any> loadAsset(path: ResourceLocation): T {
+        return `access$basicGson`!!.fromJson(loadAsset(path), T::class.java)
+    }
+
 
 }

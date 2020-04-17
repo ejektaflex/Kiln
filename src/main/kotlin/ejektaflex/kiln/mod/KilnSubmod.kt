@@ -1,6 +1,6 @@
 package ejektaflex.kiln.mod
 
-abstract class KilnSubmod(modId: String, var isActive: Boolean = true) : KilnAbstractMod() {
+abstract class KilnSubmod(modId: String) : KilnAbstractMod() {
 
     override val ID = modId
 

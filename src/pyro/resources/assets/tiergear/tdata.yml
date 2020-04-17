@@ -1,0 +1,64 @@
+data:
+  templates:
+    sword: &sword
+      damage: 4
+      speed: 1.6
+    axe: &axe
+      damage: 7
+      speed: 0.8
+  valid_enchants:
+    swords:
+      - bane_of_arthropods
+      - curse_of_vanishing
+
+  swords:
+    - wooden_sword:
+        <<: *sword
+        durability: 59
+    - golden_sword:
+        <<: *sword
+        durability: 32
+    - stone_sword:
+        <<: *sword
+        damage: 5
+        durability: 131
+    - iron_sword:
+        <<: *sword
+        damage: 6
+        durability: 250
+    - diamond_sword:
+        <<: *sword
+        damage: 7
+        durability: 1561
+  axes:
+    - wooden_axe:
+        <<: *axe
+        durability: 59
+    - golden_axe:
+        <<: *axe
+        speed: 1.0
+        durability: 32
+    - stone_axe:
+        <<: *axe
+        damage: 9
+        durability: 131
+    - iron_axe:
+        <<: *axe
+        speed: 0.9
+        damage: 9
+        durability: 250
+    - diamond_axe:
+        <<: *axe
+        speed: 1.0
+        damage: 9
+        durability: 1561
+  bows:
+    - bow:
+        speed: 1.0
+        damage: 9
+        durability: 384
+  crossbows:
+    - crossbow:
+        speed: 0.8 # unconfirmed, this is just a guess
+        damage: 9
+        durability: 326
