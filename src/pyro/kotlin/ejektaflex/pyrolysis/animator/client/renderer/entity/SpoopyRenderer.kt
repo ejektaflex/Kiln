@@ -1,6 +1,5 @@
 package ejektaflex.pyrolysis.animator.client.renderer.entity
 
-import ejektaflex.pyrolysis.Pyrolysis
 import ejektaflex.pyrolysis.animator.PyroAnimator
 import ejektaflex.pyrolysis.animator.client.model.SpoopyModel
 import ejektaflex.pyrolysis.animator.entity.SpoopyEntity

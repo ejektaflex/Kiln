@@ -15,7 +15,6 @@ import net.minecraftforge.api.distmarker.OnlyIn
 @OnlyIn(Dist.CLIENT)
 open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : EntityModel<T>() {
 
-
     val data: ModelGeometryFile = try {
         Kiln.loadAsset<ModelGeometryFile>(location)
     } catch (e: Exception) {
@@ -39,17 +38,17 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : En
         )
 
         renderer.apply {
-            rotateAngleX = model.angle[0]
-            rotateAngleY = model.angle[1]
-            rotateAngleZ = model.angle[2]
+            rotateAngleX = Math.toRadians(model.angle[0]).toFloat()
+            rotateAngleY = Math.toRadians(model.angle[1]).toFloat()
+            rotateAngleZ = Math.toRadians(model.angle[2]).toFloat()
         }
 
         for (box in model.boxes) {
             println("Adding bone to ${model.name} with name ${box.name}")
             renderer.addBox(
-                    box.pos[0],
-                    box.pos[1],
-                    box.pos[2],
+                    box.pos[0] - model.pivot[0],
+                    box.pos[1] - model.pivot[1],
+                    box.pos[2] - model.pivot[2],
                     box.size[0],
                     box.size[1],
                     box.size[2],
@@ -100,7 +99,7 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : En
     class BoneModel {
         var name = "NO_MODEL_NAME"
         var pivot = mutableListOf<Float>()
-        var angle = mutableListOf<Float>()
+        var angle = mutableListOf<Double>()
         var boxes = mutableListOf<BoneBox>()
         @SerializedName("submodels")
         var subModels = mutableListOf<BoneModel>()

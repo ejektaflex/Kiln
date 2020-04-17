@@ -5,6 +5,7 @@ import ejektaflex.pyrolysis.animator.entity.SpoopyEntity
 import ejektaflex.kiln.client.model.KilnSegmentedModel
 import ejektaflex.pyrolysis.animator.PyroAnimator
 import net.minecraft.client.renderer.model.ModelRenderer
+import net.minecraft.util.ResourceLocation
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
 
@@ -21,8 +22,12 @@ class SpoopyModel : KilnSegmentedModel<SpoopyEntity>(PyroAnimator.locate("spoop.
     }
 
     override fun setRotationAngles(entityIn: SpoopyEntity, limbSwing: Float, limbSwingAmount: Float, ageInTicks: Float, netHeadYaw: Float, headPitch: Float) {
-        renderMap["face"]!!.apply {
-            rotateAngleX = Math.toRadians(ageInTicks * 5.0 % 360.0).toFloat()
+        renderMap["nose_bone"]!!.apply {
+            rotateAngleZ = Math.toRadians(ageInTicks * 2.0 % 360.0).toFloat()
+        }
+
+        renderMap["drip_bone"]!!.apply {
+            rotateAngleZ = Math.toRadians(ageInTicks * 2.0 % 360.0).toFloat()
         }
 
     }
