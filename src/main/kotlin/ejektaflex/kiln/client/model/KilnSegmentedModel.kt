@@ -6,6 +6,7 @@ import com.mojang.blaze3d.platform.GlStateManager
 import com.mojang.blaze3d.vertex.IVertexBuilder
 import ejektaflex.kiln.Kiln
 import net.minecraft.client.renderer.entity.model.EntityModel
+import net.minecraft.client.renderer.entity.model.SegmentedModel
 import net.minecraft.client.renderer.model.ModelRenderer
 import net.minecraft.entity.LivingEntity
 import net.minecraft.util.ResourceLocation
@@ -15,7 +16,7 @@ import java.util.*
 
 
 @OnlyIn(Dist.CLIENT)
-open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : EntityModel<T>() {
+open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : SegmentedModel<T>() {
 
     val data: ModelGeometryFile = try {
         Kiln.loadAsset<ModelGeometryFile>(location)
@@ -25,11 +26,13 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : En
 
     val renderMap = mutableMapOf<String, ModelRenderer>()
 
+    val topLevelRenders = mutableListOf<ModelRenderer>()
+
     init {
         createGeometry()
     }
 
-    private fun parseModel(model: BoneModel): ModelRenderer {
+    private fun parseModel(model: BoneModel, top: Boolean = false): ModelRenderer {
         println("Setting renderer for ${model.name}")
         val renderer = ModelRenderer(this)
 
@@ -47,6 +50,7 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : En
 
         for (box in model.boxes) {
             println("Adding bone to ${model.name} with name ${box.name}")
+            renderer.setTextureOffset(box.uv[0], box.uv[1])
             renderer.addBox(
                     box.pos[0],
                     box.pos[1],
@@ -54,9 +58,7 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : En
                     box.size[0],
                     box.size[1],
                     box.size[2],
-                    0f,
-                    box.uv[0].toFloat(),
-                    box.uv[1].toFloat()
+                    0f
             )
         }
 
@@ -66,6 +68,9 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : En
         }
 
         renderMap[model.name] = renderer
+        if (top) {
+            topLevelRenders.add(renderer)
+        }
         return renderer
     }
 
@@ -73,16 +78,16 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : En
     private fun createGeometry() {
         for (model in data.models) {
             println("This is a model! ${model.name}")
-            parseModel(model)
+            parseModel(model, true)
         }
     }
 
     override fun render(matrixStackIn: MatrixStack, bufferIn: IVertexBuilder, packedLightIn: Int, packedOverlayIn: Int, red: Float, green: Float, blue: Float, alpha: Float) {
-        GlStateManager.pushMatrix()
-        for (model in renderMap.values) {
+        matrixStackIn.push()
+        for (model in topLevelRenders) {
             model.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha)
         }
-        GlStateManager.popMatrix()
+        matrixStackIn.pop()
     }
 
     override fun setRotationAngles(entityIn: T, limbSwing: Float, limbSwingAmount: Float, ageInTicks: Float, netHeadYaw: Float, headPitch: Float) {
@@ -112,6 +117,10 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : En
         var uv = mutableListOf<Int>()
         var pos = mutableListOf<Float>()
         var size = mutableListOf<Float>()
+    }
+
+    override fun getParts(): MutableIterable<ModelRenderer> {
+        return renderMap.values
     }
 
 }

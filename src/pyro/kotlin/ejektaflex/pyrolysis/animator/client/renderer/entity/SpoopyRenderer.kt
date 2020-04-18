@@ -4,6 +4,7 @@ import ejektaflex.pyrolysis.animator.PyroAnimator
 import ejektaflex.pyrolysis.animator.client.model.SpoopyModel
 import ejektaflex.pyrolysis.animator.entity.SpoopyEntity
 import net.minecraft.client.renderer.entity.EntityRendererManager
+import net.minecraft.client.renderer.entity.LivingRenderer
 import net.minecraft.client.renderer.entity.MobRenderer
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.api.distmarker.Dist
