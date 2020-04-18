@@ -33,7 +33,12 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : Se
     val topLevelRenders = mutableListOf<KilnModelRenderer>()
 
     init {
-        createGeometry()
+        for (model in data.models) {
+            println("This is a model! ${model.name}")
+            parseModel(model, true)
+        }
+        // Save reference geometry for animations
+        renderMap.values.forEach { rend -> rend.animRef.save() }
     }
 
     private fun parseModel(model: BoneModel, top: Boolean = false): ModelRenderer {
@@ -76,14 +81,6 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : Se
             topLevelRenders.add(renderer)
         }
         return renderer
-    }
-
-
-    private fun createGeometry() {
-        for (model in data.models) {
-            println("This is a model! ${model.name}")
-            parseModel(model, true)
-        }
     }
 
     override fun render(matrixStackIn: MatrixStack, bufferIn: IVertexBuilder, packedLightIn: Int, packedOverlayIn: Int, red: Float, green: Float, blue: Float, alpha: Float) {
