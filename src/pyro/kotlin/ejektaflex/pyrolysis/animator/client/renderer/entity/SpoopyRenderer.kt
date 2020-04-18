@@ -10,7 +10,8 @@ import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
 
 @OnlyIn(Dist.CLIENT)
-class SpoopyRenderer(renderManagerIn: EntityRendererManager) : MobRenderer<SpoopyEntity, SpoopyModel>(renderManagerIn, SpoopyModel(), 0.5f) {
+class SpoopyRenderer(renderManagerIn: EntityRendererManager) :
+        MobRenderer<SpoopyEntity, SpoopyModel>(renderManagerIn, SpoopyModel(), 0.5f) {
 
     override fun getEntityTexture(entity: SpoopyEntity): ResourceLocation {
         return TEXTURES

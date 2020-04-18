@@ -16,7 +16,7 @@ import net.minecraftforge.fml.config.ModConfig
 object Pyrolysis : KilnMod() {
 
     init {
-        registerSubmod(PyroTierGear)
+        //registerSubmod(PyroTierGear)
         registerSubmod(PyroAnimator)
     }
 

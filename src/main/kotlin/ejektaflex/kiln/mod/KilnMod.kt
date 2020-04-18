@@ -21,7 +21,7 @@ abstract class KilnMod() : KilnAbstractMod() {
     }
 
     override val ID: String by lazy {
-        this::class.findAnnotation<Mod>()?.value ?: throw Exception("Mod not annotated!")
+        this::class.findAnnotation<Mod>()?.value ?: throw Exception("Mod not annotated! Classes extending KilnMod must have the '@Mod' annotation with a valid ID.")
     }
 
 }

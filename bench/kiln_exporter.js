@@ -19,7 +19,7 @@ var kilnCodec = new Codec('kiln_exportable', {
 		Outliner.root.forEach(obj => {
 			console.log("It's a " + obj.type);
 			if (obj.type === 'cube') {
-				baseModel.boxes.push(makeBox(obj, baseModel));
+				baseModel.boxes.push(makeBox(obj));
 			} else {
 				entity.models.push(makeModel(obj, null))
 				//let cube = recurvBBGroup(obj, createCubeFromGroup(obj, true));
@@ -29,9 +29,39 @@ var kilnCodec = new Codec('kiln_exportable', {
 
 		entity.models.push(baseModel);
 
+		entity.models.forEach(model => {
+			prepareModel(model);
+		});
+
 		return autoStringify(entity);
     }
 })
+
+// Offset box positions based on model pivots
+function prepareModel(model, pivotSum = [0, 0, 0]) {
+
+	var newPivotSum = [
+		model.pivot[0] + pivotSum[0],
+		model.pivot[1] + pivotSum[1],
+		model.pivot[2] + pivotSum[2],
+	];
+
+	console.log("Pivoting: ");
+	console.log(model);
+	console.log("Box num: " + model.boxes.length);
+
+	model.boxes.forEach(box => {
+		console.log(box);
+		console.log("Name: " + box);
+		box.pos[0] -= newPivotSum[0];
+		box.pos[1] -= newPivotSum[1];
+		box.pos[2] -= newPivotSum[2];
+	})
+
+	model.submodels.forEach(submodel => {
+		prepareModel(submodel, newPivotSum);
+	});
+}
 
 function makeEmptyBox() {
 	return {
@@ -70,11 +100,12 @@ function makeModel(obj, parent) {
 	// recursion
 	obj.children.forEach(child => {
 		if (child.type == "cube") {
-			model.boxes.push(makeBox(child, parent));
+			model.boxes.push(makeBox(child));
 		} else {
 			model.submodels.push(makeModel(child, model));
 		}
 	});
+
 
 	if (parent != null) {
 		model.pivot[0] -= parent.pivot[0];
@@ -85,7 +116,7 @@ function makeModel(obj, parent) {
 	return model;
 }
 
-function makeBox(obj, parent) {
+function makeBox(obj) {
 	var cube = makeEmptyBox();
 	cube.name = obj.name;
 	cube.uv[0] = Math.floor(obj.uv_offset[0]);
@@ -93,12 +124,6 @@ function makeBox(obj, parent) {
 	cube.pos[0] = -obj.to[0];
 	cube.pos[1] = -obj.to[1];
 	cube.pos[2] = obj.from[2];
-	
-	if (parent != null) {
-		cube.pos[0] -= parent.pivot[0];
-		cube.pos[1] -= parent.pivot[1];
-		cube.pos[2] -= parent.pivot[2];
-	}
 	
 	cube.size[0] = obj.size(0, true);
 	cube.size[1] = obj.size(1, true);

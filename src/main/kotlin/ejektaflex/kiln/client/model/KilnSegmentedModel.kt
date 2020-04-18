@@ -2,6 +2,7 @@ package ejektaflex.kiln.client.model
 
 import com.google.gson.annotations.SerializedName
 import com.mojang.blaze3d.matrix.MatrixStack
+import com.mojang.blaze3d.platform.GlStateManager
 import com.mojang.blaze3d.vertex.IVertexBuilder
 import ejektaflex.kiln.Kiln
 import net.minecraft.client.renderer.entity.model.EntityModel
@@ -10,6 +11,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
+import java.util.*
 
 
 @OnlyIn(Dist.CLIENT)
@@ -46,9 +48,9 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : En
         for (box in model.boxes) {
             println("Adding bone to ${model.name} with name ${box.name}")
             renderer.addBox(
-                    box.pos[0] - model.pivot[0],
-                    box.pos[1] - model.pivot[1],
-                    box.pos[2] - model.pivot[2],
+                    box.pos[0],
+                    box.pos[1],
+                    box.pos[2],
                     box.size[0],
                     box.size[1],
                     box.size[2],
@@ -76,11 +78,11 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : En
     }
 
     override fun render(matrixStackIn: MatrixStack, bufferIn: IVertexBuilder, packedLightIn: Int, packedOverlayIn: Int, red: Float, green: Float, blue: Float, alpha: Float) {
-        //GlStateManager.pushMatrix()
+        GlStateManager.pushMatrix()
         for (model in renderMap.values) {
             model.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha)
         }
-        //GlStateManager.popMatrix()
+        GlStateManager.popMatrix()
     }
 
     override fun setRotationAngles(entityIn: T, limbSwing: Float, limbSwingAmount: Float, ageInTicks: Float, netHeadYaw: Float, headPitch: Float) {
