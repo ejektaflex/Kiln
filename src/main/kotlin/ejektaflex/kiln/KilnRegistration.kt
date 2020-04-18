@@ -16,6 +16,7 @@ object KilnRegistration {
     ): EntityType<E> {
         return EntityType.Builder.create(entity, classification)
                 .setTrackingRange(32)
+
                 .build(loc.toString()).apply {
                     setRegistryName(loc)
         }

@@ -5,6 +5,8 @@ import com.mojang.blaze3d.matrix.MatrixStack
 import com.mojang.blaze3d.platform.GlStateManager
 import com.mojang.blaze3d.vertex.IVertexBuilder
 import ejektaflex.kiln.Kiln
+import ejektaflex.kiln.anim.Animation
+import ejektaflex.kiln.client.renderer.KilnModelRenderer
 import net.minecraft.client.renderer.entity.model.EntityModel
 import net.minecraft.client.renderer.entity.model.SegmentedModel
 import net.minecraft.client.renderer.model.ModelRenderer
@@ -18,15 +20,17 @@ import java.util.*
 @OnlyIn(Dist.CLIENT)
 open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : SegmentedModel<T>() {
 
+    var animation: Animation? = null
+
     val data: ModelGeometryFile = try {
         Kiln.loadAsset<ModelGeometryFile>(location)
     } catch (e: Exception) {
         throw Exception("Could not load model asset from '$location'")
     }
 
-    val renderMap = mutableMapOf<String, ModelRenderer>()
+    val renderMap = mutableMapOf<String, KilnModelRenderer>()
 
-    val topLevelRenders = mutableListOf<ModelRenderer>()
+    val topLevelRenders = mutableListOf<KilnModelRenderer>()
 
     init {
         createGeometry()
@@ -34,7 +38,7 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : Se
 
     private fun parseModel(model: BoneModel, top: Boolean = false): ModelRenderer {
         println("Setting renderer for ${model.name}")
-        val renderer = ModelRenderer(this)
+        val renderer = KilnModelRenderer(this, model.name)
 
         renderer.setRotationPoint(
                 model.pivot[0],
@@ -83,11 +87,13 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : Se
     }
 
     override fun render(matrixStackIn: MatrixStack, bufferIn: IVertexBuilder, packedLightIn: Int, packedOverlayIn: Int, red: Float, green: Float, blue: Float, alpha: Float) {
-        matrixStackIn.push()
         for (model in topLevelRenders) {
+            matrixStackIn.push()
+            matrixStackIn.translate(model.xOff, model.yOff, model.zOff)
             model.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha)
+            matrixStackIn.pop()
         }
-        matrixStackIn.pop()
+
     }
 
     override fun setRotationAngles(entityIn: T, limbSwing: Float, limbSwingAmount: Float, ageInTicks: Float, netHeadYaw: Float, headPitch: Float) {

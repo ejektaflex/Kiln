@@ -1,7 +1,7 @@
 (function() {
 var type;
 
-var kilnCodec = new Codec('kiln_exportable', {
+var kilnModelCodec = new Codec('kiln_exportable_model', {
     name: 'Kiln Model',
     extension: 'json',
     remember: false,
@@ -22,8 +22,6 @@ var kilnCodec = new Codec('kiln_exportable', {
 				baseModel.boxes.push(makeBox(obj));
 			} else {
 				entity.models.push(makeModel(obj, null))
-				//let cube = recurvBBGroup(obj, createCubeFromGroup(obj, true));
-				//model.groups.push(cube);
 			}
 		});
 
@@ -37,22 +35,86 @@ var kilnCodec = new Codec('kiln_exportable', {
     }
 })
 
+var kilnAnimCodec = new Codec('kiln_exportable_anim', {
+    name: 'Kiln Animation',
+    extension: 'anim.json',
+    remember: false,
+    compile(options) {
+        var data = {
+			animations: []
+		};
+		
+		Animator.animations.forEach(anim => {
+			data.animations.push(makeAnim(anim))
+		});
+
+		return autoStringify(data);
+    }
+})
+
+
+function makeEmptyAnim() {
+	return {
+		name: "",
+		length: 0,
+		bones: []
+	}
+}
+
+function makeEmptyBone() {
+	return {
+		rot: [],
+		pos: []
+	}
+}
+
+
+function makeAnim(obj) {
+	var anim = makeEmptyAnim();
+
+	anim.name = obj.name;
+	anim.length = obj.length;
+
+	function compareFrame(a, b) {
+		return parseFloat(a.time) - parseFloat(b.time);
+	}
+
+	Object.values(obj.animators).forEach(boneMover => {
+
+
+		if (boneMover.rotation.length > 0 || boneMover.position.length > 0) {
+
+			var bone = makeEmptyBone();
+
+			bone.name = boneMover.name;
+
+			boneMover.rotation.sort(compareFrame).forEach(frame => {
+				console.log(frame.time);
+				bone.rot.push([parseFloat(frame.time), parseFloat(frame.x), parseFloat(frame.y), parseFloat(frame.z)]);
+			});
+			boneMover.position.sort(compareFrame).forEach(frame => {
+				bone.pos.push([parseFloat(frame.time), parseFloat(frame.x), parseFloat(frame.y), parseFloat(frame.z)]);
+			});
+	
+			anim.bones.push(bone);
+		}
+
+		
+	});
+
+	return anim;
+}
+
+
 // Offset box positions based on model pivots
 function prepareModel(model, pivotSum = [0, 0, 0]) {
-
 	var newPivotSum = [
 		model.pivot[0] + pivotSum[0],
 		model.pivot[1] + pivotSum[1],
 		model.pivot[2] + pivotSum[2],
 	];
 
-	console.log("Pivoting: ");
-	console.log(model);
-	console.log("Box num: " + model.boxes.length);
-
 	model.boxes.forEach(box => {
-		console.log(box);
-		console.log("Name: " + box);
 		box.pos[0] -= newPivotSum[0];
 		box.pos[1] -= newPivotSum[1];
 		box.pos[2] -= newPivotSum[2];
@@ -65,7 +127,6 @@ function prepareModel(model, pivotSum = [0, 0, 0]) {
 
 function makeEmptyBox() {
 	return {
-		//type: "box",
 		name: "",
 		uv: [0, 0],
 		pos: [0.0, 0.0, 0.0],
@@ -75,7 +136,6 @@ function makeEmptyBox() {
 
 function makeEmptyModel() {
 	return {
-		//type: "model",
 		name: "",
 		pivot: [0.0, 0.0, 0.0],
 		angle: [0.0, 0.0, 0.0],
@@ -131,7 +191,8 @@ function makeBox(obj) {
 	return cube;
 }
 
-var onExport;
+var onExportModel;
+var onExportAnim;
 
 Plugin.register('kiln_exporter', {
 	title: 'Kiln Exporter',
@@ -142,22 +203,39 @@ Plugin.register('kiln_exporter', {
 	variant: 'both',
 	min_version: '1.0.0',
 	onload() {
-		onExport = new Action({
-			id: 'export_to_kiln',
+		onExportModel = new Action({
+			id: 'export_to_kiln_model',
 			name: 'Export to Kiln Entity Model',
 			icon: 'archive',
 			description: 'Allows your models to be exported in a format that Kiln can read!',
 			category: 'file',
 			condition: () => Format.id === 'bedrock',
 			click: function () {
-				kilnCodec.export();
+				kilnModelCodec.export();
 			}
 		});
 
-		MenuBar.addAction(onExport, 'file.export');
+		onExportAnim = new Action({
+			id: 'export_to_kiln_anim',
+			name: 'Export Kiln Animation',
+			icon: 'archive',
+			description: 'Allows your animation to be exported in a format that Kiln can read!',
+			category: 'animation',
+			condition: () => Format.id === 'bedrock',
+			click: function () {
+				kilnAnimCodec.export();
+			}
+		});
+
+		MenuBar.addAction(onExportModel, 'file.export');
+		MenuBar.addAction(onExportAnim, 'animation');
+
+		
 	},
 	onunload() {
-		onExport.delete();
+		onExportModel.delete();
+		onExportAnim.delete();
+
 		console.clear();
 	}
 });

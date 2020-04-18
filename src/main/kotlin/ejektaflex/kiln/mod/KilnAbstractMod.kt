@@ -2,6 +2,7 @@ package ejektaflex.kiln.mod
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import ejektaflex.kiln.json.JsonAdapter
 import net.minecraft.client.Minecraft
 import net.minecraft.util.ResourceLocation
 import java.util.logging.Logger
@@ -16,9 +17,6 @@ abstract class KilnAbstractMod {
         Logger.getLogger(ID)
     }
 
-    protected val basicGson = GsonBuilder()
-            .setPrettyPrinting()
-            .create()
 
     fun locate(place: String) = ResourceLocation(ID, place)
 
@@ -32,17 +30,17 @@ abstract class KilnAbstractMod {
 
     // Client side asset loading
     fun <T : Any> loadAsset(path: ResourceLocation, klazz: KClass<T>): T {
-        return basicGson.fromJson(loadAsset(path), klazz.java)
+        return JsonAdapter.gson.fromJson(loadAsset(path), klazz.java)
     }
 
     // Client side asset loading
     fun <T : Any> loadAsset(path: String, klazz: KClass<T>): T {
-        return basicGson.fromJson(loadAsset(path), klazz.java)
+        return JsonAdapter.gson.fromJson(loadAsset(path), klazz.java)
     }
 
     @PublishedApi
     internal val `access$basicGson`: Gson?
-        get() = basicGson
+        get() = JsonAdapter.gson
 
     inline fun <reified T : Any> loadAsset(path: String): T {
         return `access$basicGson`!!.fromJson(loadAsset(path), T::class.java)
