@@ -67,13 +67,18 @@ class Animation(location: ResourceLocation) {
                 // we have a valid keyframe that is not the last
                 val curr = bone.rot[currIndex]
                 val next = bone.rot[currIndex+1]
-                val lerpPos = (frameLoc - curr.time) / next.time
+
+                // Avoid divide-by-zero for instances where frames have same frame time
+                if (curr.time == next.time) { return }
+
+                val lerpPos = (frameLoc - curr.time) / (next.time - curr.time)
                 println("LerpPos $lerpPos")
                 rend.rotateAngleZ = lerp(
                         ref.zAngle + angle(curr.nums[2]),
                         ref.zAngle + angle(next.nums[2]),
                         lerpPos.toFloat()
                 )
+
             }
         }
 
