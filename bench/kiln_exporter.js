@@ -93,7 +93,7 @@ function makeAnim(obj) {
 				bone.rot.push([parseFloat(frame.time), parseFloat(frame.x), parseFloat(frame.y), parseFloat(frame.z)]);
 			});
 			boneMover.position.sort(compareFrame).forEach(frame => {
-				bone.pos.push([parseFloat(frame.time), parseFloat(frame.x), parseFloat(frame.y), parseFloat(frame.z)]);
+				bone.pos.push([parseFloat(frame.time), parseFloat(frame.x) / 16, parseFloat(frame.y) / 16, parseFloat(frame.z) / 16]);
 			});
 	
 			anim.bones.push(bone);
