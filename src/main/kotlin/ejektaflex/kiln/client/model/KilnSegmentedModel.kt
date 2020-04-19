@@ -34,7 +34,6 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : Se
 
     init {
         for (model in data.models) {
-            println("This is a model! ${model.name}")
             parseModel(model, true)
         }
         // Save reference geometry for animations
@@ -42,7 +41,6 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : Se
     }
 
     private fun parseModel(model: BoneModel, top: Boolean = false): ModelRenderer {
-        println("Setting renderer for ${model.name}")
         val renderer = KilnModelRenderer(this, model.name)
 
         renderer.setRotationPoint(
@@ -85,10 +83,7 @@ open class KilnSegmentedModel<T : LivingEntity>(location: ResourceLocation) : Se
 
     override fun render(matrixStackIn: MatrixStack, bufferIn: IVertexBuilder, packedLightIn: Int, packedOverlayIn: Int, red: Float, green: Float, blue: Float, alpha: Float) {
         for (model in topLevelRenders) {
-            matrixStackIn.push()
-            matrixStackIn.translate(model.xOff, model.yOff, model.zOff)
             model.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha)
-            matrixStackIn.pop()
         }
 
     }
