@@ -1,13 +1,8 @@
-package ejektaflex.kiln.anim
+package ejektaflex.kilnx.anim
 
 import ejektaflex.kiln.Kiln
-import ejektaflex.kiln.client.model.KilnSegmentedModel
-import ejektaflex.kiln.client.renderer.KilnModelRenderer
-import ejektaflex.kiln.json.JsonAdapter
-import net.minecraft.client.Minecraft
+import ejektaflex.kilnx.client.renderer.KilnModelRenderer
 import net.minecraft.util.ResourceLocation
-import java.io.File
-import kotlin.math.max
 
 class Animation(location: ResourceLocation) {
 
