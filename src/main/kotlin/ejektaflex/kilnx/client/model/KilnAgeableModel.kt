@@ -1,4 +1,4 @@
-package ejektaflex.kiln.client.model
+package ejektaflex.kilnx.client.model
 
 import net.minecraft.client.renderer.entity.model.AgeableModel
 import net.minecraft.client.renderer.model.ModelRenderer

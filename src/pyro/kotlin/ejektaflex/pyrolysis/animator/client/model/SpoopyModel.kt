@@ -1,15 +1,11 @@
 package ejektaflex.pyrolysis.animator.client.model
 
-import ejektaflex.kiln.anim.Animation
-import ejektaflex.pyrolysis.Pyrolysis
+import ejektaflex.kilnx.anim.Animation
 import ejektaflex.pyrolysis.animator.entity.SpoopyEntity
-import ejektaflex.kiln.client.model.KilnSegmentedModel
+import ejektaflex.kilnx.client.model.KilnSegmentedModel
 import ejektaflex.pyrolysis.animator.PyroAnimator
-import net.minecraft.client.renderer.model.ModelRenderer
-import net.minecraft.util.ResourceLocation
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
-import java.util.*
 
 @OnlyIn(Dist.CLIENT)
 class SpoopyModel : KilnSegmentedModel<SpoopyEntity>(PyroAnimator.locate("spoop.json")) {

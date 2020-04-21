@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.util.ResourceLocation
 import java.util.logging.Logger
 import kotlin.reflect.KClass
+import kotlin.reflect.KProperty
 
 @Suppress("PropertyName", "LeakingThis")
 abstract class KilnAbstractMod {
@@ -16,7 +17,6 @@ abstract class KilnAbstractMod {
     val LOGGER: Logger by lazy {
         Logger.getLogger(ID)
     }
-
 
     fun locate(place: String) = ResourceLocation(ID, place)
 

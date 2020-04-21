@@ -5,6 +5,7 @@ import ejektaflex.kiln.ext.invoke
 import ejektaflex.kiln.mod.KilnMod
 import ejektaflex.kiln.mod.KilnSubmod
 import ejektaflex.pyrolysis.animator.PyroAnimator
+import ejektaflex.pyrolysis.runestones.Runestones
 import ejektaflex.pyrolysis.tiergear.PyroTierGear
 import net.minecraftforge.common.ForgeConfigSpec
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -17,7 +18,8 @@ object Pyrolysis : KilnMod() {
 
     init {
         //registerSubmod(PyroTierGear)
-        registerSubmod(PyroAnimator)
+        //registerSubmod(PyroAnimator)
+        registerSubmod(Runestones)
     }
 
 }

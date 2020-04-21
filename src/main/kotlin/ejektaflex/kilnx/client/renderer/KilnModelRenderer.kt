@@ -1,11 +1,9 @@
-package ejektaflex.kiln.client.renderer
+package ejektaflex.kilnx.client.renderer
 
 import com.mojang.blaze3d.matrix.MatrixStack
 import com.mojang.blaze3d.vertex.IVertexBuilder
-import net.minecraft.client.renderer.BlockModelRenderer
 import net.minecraft.client.renderer.model.Model
 import net.minecraft.client.renderer.model.ModelRenderer
-import net.minecraft.entity.ai.goal.TemptGoal
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
 

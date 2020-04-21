@@ -1,4 +1,4 @@
-package ejektaflex.kiln.anim
+package ejektaflex.kilnx.anim
 
 data class AnimBone(
         var rot: List<Keyframe>,

@@ -1,20 +1,17 @@
-package ejektaflex.kiln.client.model
+package ejektaflex.kilnx.client.model
 
 import com.google.gson.annotations.SerializedName
 import com.mojang.blaze3d.matrix.MatrixStack
-import com.mojang.blaze3d.platform.GlStateManager
 import com.mojang.blaze3d.vertex.IVertexBuilder
 import ejektaflex.kiln.Kiln
-import ejektaflex.kiln.anim.Animation
-import ejektaflex.kiln.client.renderer.KilnModelRenderer
-import net.minecraft.client.renderer.entity.model.EntityModel
+import ejektaflex.kilnx.anim.Animation
+import ejektaflex.kilnx.client.renderer.KilnModelRenderer
 import net.minecraft.client.renderer.entity.model.SegmentedModel
 import net.minecraft.client.renderer.model.ModelRenderer
 import net.minecraft.entity.LivingEntity
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
-import java.util.*
 
 
 @OnlyIn(Dist.CLIENT)

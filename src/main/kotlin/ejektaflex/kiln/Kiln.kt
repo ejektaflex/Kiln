@@ -1,8 +1,7 @@
 package ejektaflex.kiln
 
 import com.google.gson.JsonDeserializer
-import ejektaflex.kiln.anim.Animation
-import ejektaflex.kiln.anim.Keyframe
+import ejektaflex.kilnx.anim.Keyframe
 import ejektaflex.kiln.json.JsonAdapter
 import ejektaflex.kiln.mod.KilnMod
 import net.minecraftforge.fml.common.Mod
