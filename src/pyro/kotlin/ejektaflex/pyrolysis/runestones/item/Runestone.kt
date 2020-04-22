@@ -17,7 +17,7 @@ import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
 
 abstract class Runestone(val runeId: String) : Item(
-        Properties().defaultMaxDamage(100)
+        Properties()
 ) {
 
     init {
@@ -38,14 +38,21 @@ abstract class Runestone(val runeId: String) : Item(
 
     fun addCharge(stack: ItemStack, chargeAmount: Int) {
         stack.initRuneData {
-            addCharge(chargeAmount)
-            setDamage(stack, currCharge)
+            charge(chargeAmount)
         }
     }
 
-    override fun getMaxDamage(stack: ItemStack): Int {
+    override fun showDurabilityBar(stack: ItemStack): Boolean {
+        return true
+    }
+
+    override fun getDurabilityForDisplay(stack: ItemStack): Double {
         val data = stack.runeData
-        return data.maxCharge
+        return if (data.isFullyCharged) {
+            0.0 // full bar
+        } else {
+            1.0 - data.chargePercent
+        }
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -53,7 +60,7 @@ abstract class Runestone(val runeId: String) : Item(
         val data = stack.runeData
         tooltip.addAll(listOf(
                 StringTextComponent("Level: ${data.level}"),
-                StringTextComponent("Charge: ${data.currCharge}/${data.maxCharge}"),
+                StringTextComponent("Charge: ${data.pointsAfterCharge}/${data.pointsPerCharge}"),
                 StringTextComponent("Charges: ${data.charges}"),
                 TranslationTextComponent(descriptionKey)
         ))
@@ -65,7 +72,7 @@ abstract class Runestone(val runeId: String) : Item(
         val data = stack.runeData
 
         return if (data.charges > 0) {
-            data.charges--
+            data.useCharges(1)
             onRuneUsed(worldIn, playerIn, data.level, 1)
             stack.runeData = data
             ActionResult.resultSuccess(stack)

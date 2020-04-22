@@ -14,7 +14,11 @@ class KilnNBT<D : KilnCheckableData>(val item: Item, val func: () -> D) : ReadWr
 
     override fun setValue(thisRef: ItemStack, property: KProperty<*>, value: D) {
         if (thisRef.item == item) {
-            thisRef.tag = value.serializeNBT()
+            if (thisRef.hasTag()) {
+                thisRef.tag!!.merge(value.serializeNBT())
+            } else {
+                thisRef.tag = value.serializeNBT()
+            }
         } else {
             throw Exception("Cannot set value of NBT binding ${property.name} to $value, as item is not a ${thisRef.item.name}")
         }
