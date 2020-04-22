@@ -1,6 +1,7 @@
 package ejektaflex.kiln.mod
 
 import net.alexwells.kottle.FMLKotlinModLoadingContext
+import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.Mod
 import kotlin.reflect.full.findAnnotation
 
@@ -17,6 +18,9 @@ abstract class KilnMod() : KilnAbstractMod() {
     fun registerSubmod(submod: KilnSubmod) {
         LOGGER.info("Registering submod with ID: '${submod.ID}'..")
         submods += submod
+        // non lifecycle events
+        MinecraftForge.EVENT_BUS.register(submod)
+        // lifecycle events
         FMLKotlinModLoadingContext.get().modEventBus.register(submod)
     }
 

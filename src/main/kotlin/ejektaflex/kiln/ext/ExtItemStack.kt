@@ -63,7 +63,7 @@ inline fun <reified T : INBTSerializable<CompoundNBT>> ItemStack.editNbt(func: T
 
  */
 
-inline fun <reified T : KilnCheckableData> ItemStack.toData(func: () -> T): T {
+inline fun <T : KilnCheckableData> ItemStack.toData(func: () -> T): T {
     return func().apply {
         if (stack.hasTag()) {
             if (stack.tag!!.keySet().containsAll(getCheckableKeys())) {

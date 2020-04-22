@@ -6,9 +6,9 @@ import net.minecraftforge.fml.config.ModConfig
 import org.apache.commons.lang3.tuple.Pair as ApachePair
 
 
-open class KilnConfig<T : KilnConfig<T>>(val configType: ModConfig.Type, val fileName: String? = null) {
+open class KilnConfig<T : KilnConfig<T>>(private val configType: ModConfig.Type, val fileName: String? = null) {
 
-    var builder = ForgeConfigSpec.Builder()
+    private var builder = ForgeConfigSpec.Builder()
 
     @Suppress("UNCHECKED_CAST")
     fun register(): T {

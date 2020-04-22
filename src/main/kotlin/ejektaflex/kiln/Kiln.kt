@@ -4,6 +4,8 @@ import com.google.gson.JsonDeserializer
 import ejektaflex.kilnx.anim.Keyframe
 import ejektaflex.kiln.json.JsonAdapter
 import ejektaflex.kiln.mod.KilnMod
+import net.minecraftforge.event.entity.living.LivingEvent
+import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 
 @Mod("kiln")
