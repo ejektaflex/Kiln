@@ -20,8 +20,14 @@ abstract class Runestone(val runeId: String) : Item(
         Properties()
 ) {
 
+
+    private var ItemStack.runeData: RuneData by KilnNBT(this.asItem(), ::RuneData)
+
     init {
         registryName = Runestones.locate(runeId)
+        addPropertyOverride(Runestones.locate("charges")) { stack, world, entity ->
+            stack.runeData.charges / 10f
+        }
     }
 
     val descriptionKey: String
@@ -29,7 +35,6 @@ abstract class Runestone(val runeId: String) : Item(
 
     abstract fun onRuneUsed(world: World, player: PlayerEntity, level: Int, chargesUsed: Int)
 
-    private var ItemStack.runeData: RuneData by KilnNBT(this.asItem(), ::RuneData)
 
     // Automagically utilizing setters and getters
     private fun ItemStack.initRuneData(func: RuneData.() -> Unit = {}) {

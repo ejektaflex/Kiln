@@ -1,0 +1,6 @@
+{
+  "parent": "runestones:item/runestone",
+  "textures": {
+    "layer2": "runestones:item/rune-dot-0"
+  }
+}

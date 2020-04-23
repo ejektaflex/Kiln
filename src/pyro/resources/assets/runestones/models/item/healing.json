@@ -1,0 +1,20 @@
+{
+  "parent": "runestones:item/runestone",
+  "textures": {
+    "layer1": "runestones:item/rune-jasna"
+  },
+  "overrides": [
+    {
+      "predicate": { "runestones:charges": 0.1 },
+      "model": "runestones:item/rune-no-dots"
+    },
+    {
+      "predicate": { "runestones:charges": 0.2 },
+      "model": "runestones:item/rune-one-dot"
+    },
+    {
+      "predicate": { "runestones:charges": 0.3 },
+      "model": "runestones:item/rune-two-dots"
+    }
+  ]
+}

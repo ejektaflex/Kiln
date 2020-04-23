@@ -4,8 +4,10 @@ import ejektaflex.kiln.ext.edit
 import ejektaflex.kiln.mod.KilnSubmod
 import ejektaflex.pyrolysis.runestones.item.Runestone
 import ejektaflex.pyrolysis.runestones.item.runes.HealRune
+import net.minecraft.client.gui.screen.inventory.ContainerScreen
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
+import net.minecraftforge.client.event.GuiScreenEvent
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.event.entity.living.LivingDeathEvent
@@ -22,6 +24,22 @@ object Runestones : KilnSubmod("runestones") {
     @SubscribeEvent
     fun onRegisterItems(event: RegistryEvent.Register<Item>) {
         event.registry.register(healing)
+    }
+
+    @SubscribeEvent
+    fun onDrawRune(event: GuiScreenEvent.DrawScreenEvent.Post) {
+        val gui = event.gui
+        if (event.gui is ContainerScreen<*>)
+            for (slot in event.gui.container.inventorySlots) {
+                if (slot.hasStack && slot.stack.item is Runestone) {
+                    println("Doot!")
+
+                }
+            }
+    }
+
+    fun drawRuneBar(x: Int, y: Int) {
+
     }
 
     @SubscribeEvent
