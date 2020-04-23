@@ -6,9 +6,13 @@ import ejektaflex.pyrolysis.runestones.item.Runestone
 import ejektaflex.pyrolysis.runestones.item.runes.HealRune
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screen.inventory.ContainerScreen
+import net.minecraft.client.renderer.model.ModelBakery
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraftforge.client.event.GuiScreenEvent
+import net.minecraftforge.client.event.ModelBakeEvent
+import net.minecraftforge.client.event.ModelRegistryEvent
+import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.event.entity.living.LivingDeathEvent
@@ -30,8 +34,22 @@ object Runestones : KilnSubmod("runestones") {
 
     @SubscribeEvent
     fun onClient(event: FMLClientSetupEvent) {
-        Minecraft.getInstance().itemColors.register(healing, healing)
+        //Minecraft.getInstance().itemColors.register(healing, healing)
+
+
+
     }
+
+    @SubscribeEvent
+    fun regModel(event: ModelRegistryEvent) {
+        println("Registering healing")
+        ModelLoader.addSpecialModel(locate("item/runestone"))
+    }
+
+    @SubscribeEvent
+    fun onBake(event: ModelBakeEvent) {
+    }
+
 
     @SubscribeEvent
     fun onEntityDeath(event: LivingDeathEvent) {
