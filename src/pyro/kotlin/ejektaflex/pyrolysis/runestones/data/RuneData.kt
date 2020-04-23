@@ -27,7 +27,7 @@ class RuneData : KilnCheckableData() {
     val maxPoints: Int
         get() = maxCharges * pointsPerCharge
 
-    val chargePercent: Double
+    val remainderPercent: Double
         get() = pointsAfterCharge.toDouble() / pointsPerCharge
 
     val pointsAfterCharge: Int

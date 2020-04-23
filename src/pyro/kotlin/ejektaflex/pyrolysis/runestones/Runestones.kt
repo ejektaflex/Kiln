@@ -4,6 +4,7 @@ import ejektaflex.kiln.ext.edit
 import ejektaflex.kiln.mod.KilnSubmod
 import ejektaflex.pyrolysis.runestones.item.Runestone
 import ejektaflex.pyrolysis.runestones.item.runes.HealRune
+import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screen.inventory.ContainerScreen
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
@@ -14,6 +15,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import kotlin.math.ceil
 import kotlin.math.max
 
@@ -27,19 +29,8 @@ object Runestones : KilnSubmod("runestones") {
     }
 
     @SubscribeEvent
-    fun onDrawRune(event: GuiScreenEvent.DrawScreenEvent.Post) {
-        val gui = event.gui
-        if (event.gui is ContainerScreen<*>)
-            for (slot in event.gui.container.inventorySlots) {
-                if (slot.hasStack && slot.stack.item is Runestone) {
-                    println("Doot!")
-
-                }
-            }
-    }
-
-    fun drawRuneBar(x: Int, y: Int) {
-
+    fun onClient(event: FMLClientSetupEvent) {
+        Minecraft.getInstance().itemColors.register(healing, healing)
     }
 
     @SubscribeEvent

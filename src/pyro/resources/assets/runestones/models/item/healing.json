@@ -1,20 +1,10 @@
 {
-  "parent": "runestones:item/runestone",
+  "parent": "item/generated",
   "textures": {
-    "layer1": "runestones:item/rune-jasna"
-  },
-  "overrides": [
-    {
-      "predicate": { "runestones:charges": 0.1 },
-      "model": "runestones:item/rune-no-dots"
-    },
-    {
-      "predicate": { "runestones:charges": 0.2 },
-      "model": "runestones:item/rune-one-dot"
-    },
-    {
-      "predicate": { "runestones:charges": 0.3 },
-      "model": "runestones:item/rune-two-dots"
-    }
-  ]
+    "layer0": "runestones:item/rune-base",
+    "layer1": "runestones:item/rune-jasna",
+    "layer2": "runestones:item/rune-dot-1",
+    "layer3": "runestones:item/rune-dot-2",
+    "layer4": "runestones:item/rune-dot-3"
+  }
 }
