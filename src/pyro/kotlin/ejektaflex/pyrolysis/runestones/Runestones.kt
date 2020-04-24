@@ -3,16 +3,21 @@ package ejektaflex.pyrolysis.runestones
 import com.mojang.blaze3d.platform.GlStateManager
 import ejektaflex.kiln.ext.edit
 import ejektaflex.kiln.mod.KilnSubmod
-import ejektaflex.pyrolysis.runestones.client.RuneRenderer
 import ejektaflex.pyrolysis.runestones.item.Runestone
 import ejektaflex.pyrolysis.runestones.item.runes.HealRune
 import net.minecraft.client.Minecraft
+import net.minecraft.client.entity.player.ClientPlayerEntity
+import net.minecraft.client.renderer.*
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.util.ResourceLocation
+import net.minecraft.util.math.AxisAlignedBB
+import net.minecraft.util.math.BlockPos
 import net.minecraftforge.client.event.ModelBakeEvent
 import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.client.event.RenderGameOverlayEvent
+import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.event.entity.living.LivingDeathEvent
@@ -45,6 +50,44 @@ object Runestones : KilnSubmod("runestones") {
         if (event.type == RenderGameOverlayEvent.ElementType.HOTBAR) {
             //RuneRenderer.render()
         }
+    }
+
+    var op = arrayOf(0.0, 0.0, 0.0)
+    var si = arrayOf(1.0, 1.0, 1.0)
+
+    private fun blockBox(x: Double, y: Double, z: Double, pos: Array<Double>, size: Array<Double>): AxisAlignedBB {
+        return AxisAlignedBB(
+                pos[0], pos[1], pos[2],
+                size[0], size[1], size[2]
+        ).offset(pos[0] - x, pos[1] - y, pos[2] - z)
+    }
+
+    @SubscribeEvent
+    fun onDraw(event: RenderWorldLastEvent) {
+
+
+        val a = BlockPos(0, 0, 0)
+
+        val localPlayer = Minecraft.getInstance().player
+        val ppos = localPlayer!!.position.add(3, 3, 3)
+
+        val rInfo = Minecraft.getInstance().gameRenderer.activeRenderInfo.projectedView
+
+
+        localPlayer.chasingPosX
+
+        val bb = Minecraft.getInstance().renderTypeBuffers.bufferSource.getBuffer(RenderType.getLines())
+
+        //val buff = event.context.entityOutlineFramebuffer.
+        val off = blockBox(rInfo.x, rInfo.y, rInfo.z, op, si)
+
+
+        //event.context.render
+
+        WorldRenderer.drawBoundingBox(
+                event.matrixStack, bb, off, 1f, 1f, 1f, 1f)
+
+
     }
 
     private fun drawHighlight(slot: Int, useable: Boolean) {
