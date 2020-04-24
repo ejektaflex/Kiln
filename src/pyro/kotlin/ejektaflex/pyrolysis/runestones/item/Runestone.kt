@@ -3,38 +3,26 @@ package ejektaflex.pyrolysis.runestones.item
 import ejektaflex.kiln.nbt.KilnNBT
 import ejektaflex.pyrolysis.runestones.Runestones
 import ejektaflex.pyrolysis.runestones.data.RuneData
-import ejektaflex.pyrolysis.runestones.model.RuneRenderer
-import net.minecraft.client.renderer.color.IItemColor
-import net.minecraft.client.renderer.model.ItemOverride
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
-import net.minecraft.util.math.MathHelper
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.StringTextComponent
 import net.minecraft.util.text.TranslationTextComponent
 import net.minecraft.world.World
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
-import java.util.concurrent.Callable
 
 abstract class Runestone(val runeId: String) : Item(
-        Properties().setISTER {
-            Callable {
-                RuneRenderer()
-            }
-        }
+        Properties().maxStackSize(1)
 ) {
 
     init {
         registryName = Runestones.locate(runeId)
-        println("ISTER IS ${itemStackTileEntityRenderer}")
     }
-
-
 
 
     val descriptionKey: String
